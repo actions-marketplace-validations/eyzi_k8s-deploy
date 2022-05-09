@@ -5,7 +5,7 @@ update image of kubernetes deployment through API
 ## Usage
 
 ```yml
-- uses: eyzi/k8s-deploy@main
+- uses: eyzi/k8s-deploy@v1
   with:
     api_url: https://example.com/apis/apps/v1/namespaces/default/deployments/sample-app
     api_token: example.Bearer.Token
