@@ -1,0 +1,22 @@
+name: "deploy k8s image"
+description: "update image of kubernetes deployment through API call"
+
+inputs:
+  api_url: 
+    description: url to kubernetes API
+    required: true
+  api_token:
+    description: bearer token to access kubernetes API
+    required: true
+  image:
+    description: image to deploy
+    required: true
+  version:
+    description: image version to deploy. defaults to `latest`
+
+runs:
+  using: composite
+  steps:
+    - run: >
+        curl --silent --show-error --fail -X PATCH ${{ inputs.api_url }} -H 'Content-Type: application/json-patch+json' -H 'Authorization: Bearer ${{ inputs.api_token }}'
+        -d '[{"op":"replace","path":"/spec/template/spec/containers/0/image","value":"${{ inputs.image }}:${{ inputs.version:-"latest" }}"}]'
