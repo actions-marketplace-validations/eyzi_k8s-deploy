@@ -18,6 +18,8 @@ runs:
   using: composite
   steps:
     - shell: bash
+      env:
+        VERSION: ${{inputs.version}}
       run: >
-        VERSION=${{ inputs.version }} curl --silent --show-error --fail -X PATCH ${{inputs.api_url}} -H 'Content-Type: application/json-patch+json'
-        -H 'Authorization: Bearer ${{inputs.api_token}}' -d '[{"op":"replace","path":"/spec/template/spec/containers/0/image","value":"${{inputs.image}}:${VERSION:-"latest"}"}]'
+        curl --silent --show-error --fail -X PATCH ${{inputs.api_url}} -H 'Content-Type: application/json-patch+json' -H 'Authorization: Bearer ${{inputs.api_token}}'
+        -d '[{"op":"replace","path":"/spec/template/spec/containers/0/image","value":"${{inputs.image}}:${VERSION:-"latest"}"}]'
