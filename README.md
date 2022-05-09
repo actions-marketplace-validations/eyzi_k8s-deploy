@@ -22,4 +22,4 @@ update image of kubernetes deployment through API
 - `image` (required) - this image will replace the current image of the
   deployment
 
-- `version` - image version. defaults to "latest"
+- `version` (required) - image version to deploy
