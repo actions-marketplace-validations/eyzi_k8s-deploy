@@ -1,5 +1,8 @@
 name: "deploy k8s image"
 description: "update image of kubernetes deployment through API call"
+branding:
+  icon: box
+  color: blue
 
 inputs:
   api_url: 
